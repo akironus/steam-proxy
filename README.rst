@@ -1,3 +1,19 @@
+BestDeveloper update allows to use webauth proxy.
+
+Usage: 
+
+ proxyDic = {
+              "http"  : http_proxy, 
+              "https" : https_proxy, 
+              "ftp"   : ftp_proxy
+            }
+ user = wa.WebAuth(login, passw, proxyDic)
+ user.session.get('https://store.steampowered.com/account/?l=english&cc=en', proxies = proxyDic)
+ 
+
+------------
+
+
 | |pypi| |latest| |pypipy| |license|
 | |coverage| |master_build| |docs|
 | |sonar_maintainability| |sonar_reliability| |sonar_security|
