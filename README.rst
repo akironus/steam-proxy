@@ -4,6 +4,8 @@ Usage:
 
 .. code:: bash
 
+  from steamwebproxy import wa
+
   proxyDic = {
               "http"  : http_proxy, 
               "https" : https_proxy, 
