@@ -1,5 +1,8 @@
 # -*- coding: utf-8 -*-
 """
+
+Proxie suppport added.
+
 This module simplifies the process of obtaining an authenticated session for steam websites.
 After authentication is completed, a :class:`requests.Session` is created containing the auth cookies.
 The session can be used to access ``steamcommunity.com``, ``store.steampowered.com``, and ``help.steampowered.com``.
@@ -81,11 +84,13 @@ class WebAuth(object):
     captcha_gid = -1
     captcha_code = ''
     steam_id = None     #: :class:`.SteamID` (after auth is completed)
+    proxy = None
 
-    def __init__(self, username, password=''):
+    def __init__(self, username, password='',proxy=None):
         self.__dict__.update(locals())
         self.session = make_requests_session()
         self._session_setup()
+        self.proxy = proxy
 
     def _session_setup(self):
         pass
@@ -114,7 +119,7 @@ class WebAuth(object):
                                          'username': username,
                                          'donotcache': int(time() * 1000),
                                          },
-                                     ).json()
+                                     proxies=self.proxy).json()
         except requests.exceptions.RequestException as e:
             raise HTTPError(str(e))
 
@@ -145,7 +150,7 @@ class WebAuth(object):
         }
 
         try:
-            return self.session.post('https://steamcommunity.com/login/dologin/', data=data, timeout=15).json()
+            return self.session.post('https://steamcommunity.com/login/dologin/', data=data, timeout=15,proxies=self.proxy).json()
         except requests.exceptions.RequestException as e:
             raise HTTPError(str(e))
 
@@ -310,7 +315,7 @@ class MobileWebAuth(WebAuth):
         self.session.cookies.set('mobileClient', 'android')
 
         try:
-            return self.session.post('https://steamcommunity.com/login/dologin/', data=data, timeout=15).json()
+            return self.session.post('https://steamcommunity.com/login/dologin/', data=data, timeout=15,proxies=self.proxy).json()
         except requests.exceptions.RequestException as e:
             raise HTTPError(str(e))
         finally:
@@ -358,7 +363,7 @@ class MobileWebAuth(WebAuth):
         }
 
         try:
-            resp = self.session.post('https://api.steampowered.com/IMobileAuthService/GetWGToken/v0001', data=data)
+            resp = self.session.post('https://api.steampowered.com/IMobileAuthService/GetWGToken/v0001', data=data,proxies=self.proxy)
         except requests.exceptions.RequestException as e:
             raise HTTPError(str(e))
 
