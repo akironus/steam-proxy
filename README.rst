@@ -1,4 +1,4 @@
-BestDeveloper update allows to use webauth proxy.
+Proxy support added to webauth module, the update allows to use webauth through proxy.
 
 Usage: 
 
