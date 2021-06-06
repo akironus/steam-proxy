@@ -32,13 +32,13 @@ install_extras = {
 }
 
 setup(
-    name='steam',
+    name='steam-proxy',
     version=__version__,
     description='Module for interacting with various Steam features',
     long_description=long_description,
     url='https://github.com/ValvePython/steam',
-    author="Rossen Georgiev",
-    author_email='rossen@rgp.io',
+    author="Rossen Georgiev (proxy addon BestDeveloper)",
+    author_email='rossen@rgp.io, proxy addon bestdevelop@gmail.com',
     license='MIT',
     classifiers=[
         'Development Status :: 5 - Production/Stable',
