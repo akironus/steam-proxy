@@ -32,7 +32,7 @@ install_extras = {
 }
 
 setup(
-    name='steam-proxy',
+    name='steamwebproxy',
     version=__version__,
     description='Module for interacting with various Steam features',
     long_description=long_description,
